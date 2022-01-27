@@ -15,7 +15,7 @@ function walk_folder(dir,table=[],level=0) {
 
       let pathx = dir + '\\' + file
 
-      n=0;loop=0;empty=true
+      n=0;loop=0
 
       fs.stat( pathx, (err,stats) => {
         
@@ -32,14 +32,10 @@ function walk_folder(dir,table=[],level=0) {
 
         if( stats.isFile() ){
 
-          empty=false
           n++
           table.push(pathx)
           
         }
-	      
-	if( empty )
-	table.push("\t".repeat(level)+"├── [dossier vide]")
 
         // console.log(pathx,n,list.length,loop,`[${level}]`)
         if( n == list.length && loop == 0 )
