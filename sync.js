@@ -8,13 +8,14 @@ function walk_folder(dir,table=[],level=0) {
 		let stats = fs.statSync(pathx)
 
 		if( stats.isFile() ){
-      table.push(pathx)
+			table.push(pathx)
 		}
 		else if ( stats.isDirectory() ){
 			level++
 			walk_csv(pathx,table,level)
 		}
-	
+
 	}
 	return table
+	
 }
