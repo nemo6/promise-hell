@@ -18,13 +18,16 @@ function walk_folder(dir,table=[],level=0) {
       n=0;loop=0
 
       fs.stat( pathx, (err,stats) => {
+        
+        if( n == 0 )
+				table.push("\t".repeat(level)+path.basename(dir))
 
         if ( stats.isDirectory() ){
-
+          
           n++
           loop++
-          
           resolve(walk_csv(pathx,table,level))
+          
         }
 
         if( stats.isFile() ){
