@@ -5,7 +5,7 @@ async function walk_count(dir) {
 
 	for ( let file of list ){
 
-		let pathx = dir + "\\" + file
+		let pathx = dir + "/" + file
 
 		let stats = await fs.promises.stat(pathx)
 
