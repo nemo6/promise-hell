@@ -51,13 +51,8 @@ async function walk_obj(dir,n,obj={}) {
       obj[ext].push([
         file,
         stats.size,
-        formatBytes(stats.size),
         pathx,
-        b2(stats.mtime),
-        await count_line(pathx),
-        // String.fromCodePoint(h),
-        // Buffer.from(p).toString(),
-        hashx(Buffer.from(p).toString()),
+        await count_line(pathx)
       ])
     }else if ( stats.isDirectory() ){
       await walk_folder(pathx,n,obj)
@@ -77,13 +72,8 @@ async function walk_table(dir,n,table=[]) {
         table.push([
           file,
           stats.size,
-          formatBytes(stats.size),
           pathx,
-          b2(stats.mtime),
-          await count_line(pathx),
-          // String.fromCodePoint(h),
-          // Buffer.from(p).toString(),
-          hashx(Buffer.from(p).toString()),
+          await count_line(pathx)
         ])
       }else if ( stats.isDirectory() ){
         table.concat( await walk_folder(pathx,n,table) )
