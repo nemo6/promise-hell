@@ -4,7 +4,7 @@ function walk_folder(dir,table=[],level=0) {
     
     for ( let file of list ){
     
-        let pathx = dir + '\\' + file
+        let pathx = dir + "\\" + file
         let stats = fs.statSync(pathx)
         
         if( stats.isFile() ){
