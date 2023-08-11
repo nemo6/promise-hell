@@ -12,7 +12,7 @@ function walk_folder(dir,table=[],level=0) {
         }
         else if ( stats.isDirectory() ){
             level++
-            walk_csv(pathx,table,level)
+            walk_folder(pathx,table,level)
         }
     
     }
