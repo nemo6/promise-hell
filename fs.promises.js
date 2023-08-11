@@ -23,29 +23,13 @@ function count_line(x){
 	})
 }
 
-String.prototype.head = async function(n){
-	let p = []
-	let h = []
-	let count = 0
-	for await ( const chunk of fs.createReadStream(this.valueOf()) ){
-	  if( count >= 1 ) break
-	  count++
-	  for ( let i=0;i<n;i++ ){
-	    if( i == 0 ) h.push( chunk[i] )
-	    p.push( chunk[i] )
-	  }
-	}
-	return [p,h]
-}
-
 async function walk_obj(dir,n,obj={}) {
   let list = await fs.promises.readdir(dir)
   for ( let file of list ){
     let pathx = dir + "/" + file
     let stats = await fs.promises.stat(pathx)
     if ( stats.isFile() && path.extname(file) == ".js" ) {
-      let ext = path.extname(file).slice(1)
-      let [p,h] = await pathx.head(n)
+  	let ext = path.extname(file).slice(1)
     if( obj[ext] == undefined )
       obj[ext]=[]
       obj[ext].push([
@@ -68,7 +52,6 @@ async function walk_table(dir,n,table=[]) {
       let stats = await fs.promises.stat(pathx)
       if ( stats.isFile() && path.extname(file) == ".js" ) {
         let ext = path.extname(file).slice(1)
-        let [p,h] = await pathx.head(n)
         table.push([
           file,
           stats.size,
@@ -80,4 +63,19 @@ async function walk_table(dir,n,table=[]) {
       }
     }
     return table
+}
+
+String.prototype.head = async function(n){
+	let p = []
+	let h = []
+	let count = 0
+	for await ( const chunk of fs.createReadStream(this.valueOf()) ){
+	  if( count >= 1 ) break
+	  count++
+	  for ( let i=0;i<n;i++ ){
+	    if( i == 0 ) h.push( chunk[i] )
+	    p.push( chunk[i] )
+	  }
+	}
+	return [p,h]
 }
